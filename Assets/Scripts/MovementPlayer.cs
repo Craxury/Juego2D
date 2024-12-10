@@ -11,15 +11,19 @@ public class MovementPlayer : MonoBehaviour
     [Space]
 
     public int numLife;
+    public int maxLife;
+    private int scorePlayer;
 
     [Space]
 
     public Vector3[] Checkpoint;
 
+    public Vector3 lastPosition;
+
     private bool saltos;
     private bool vulnerable;
 
-
+    private ControlHud controlHud;
     private Rigidbody2D phisicsPlayer;
     private Animator anim;
     private SpriteRenderer spritePlayer;
@@ -32,7 +36,10 @@ public class MovementPlayer : MonoBehaviour
         anim = GetComponent<Animator>();
         spritePlayer = GetComponent<SpriteRenderer>();
         vulnerable = true;
+        controlHud = GetComponent<ControlHud>();
         gameObject.transform.position = Checkpoint[PlayerPrefs.GetInt("checkpoint")];
+        scorePlayer = 0;
+        numLife = maxLife;
     }
 
     void Update()
@@ -40,6 +47,7 @@ public class MovementPlayer : MonoBehaviour
         Movement();
         Jump();
         Checkpoints();
+        TouchFloor();
     }
 
     private void Movement()
@@ -60,10 +68,8 @@ public class MovementPlayer : MonoBehaviour
 
     private void Jump()
     {
-        Debug.Log("h");
         if (Input.GetKeyDown(KeyCode.Space) && TouchFloor())
         {
-            Debug.Log("h2");
             phisicsPlayer.velocity = new Vector2(phisicsPlayer.velocity.x, 0);
             phisicsPlayer.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         }
@@ -71,11 +77,10 @@ public class MovementPlayer : MonoBehaviour
 
     private bool TouchFloor()
     {
-        Debug.Log("h3");
         RaycastHit2D touch = Physics2D.Raycast(transform.position + new Vector3(0, -2f, 0), Vector2.down, 0.2f);
-        Debug.Log(touch.collider.gameObject.CompareTag("Player"));
-        if(touch.collider.gameObject.CompareTag("Floor"))
+        if(touch.collider != null && touch.collider.gameObject.CompareTag("Floor"))
         {
+            lastPosition=gameObject.transform.position;
             return true;
         }
         else
@@ -106,7 +111,18 @@ public class MovementPlayer : MonoBehaviour
         spritePlayer.color = Color.white;
     }
 
-    public void Checkpoints()
+    public void AddScore(int score)
+    {
+        scorePlayer += score;
+        controlHud.setTextScore(scorePlayer);
+    }
+
+    public void AddLife(int life)
+    {
+        maxLife += life;
+    }
+
+    private void Checkpoints()
     {
         if (PlayerPrefs.GetInt("chekpoint") != 0)
         {

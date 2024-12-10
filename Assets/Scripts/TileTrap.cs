@@ -10,6 +10,6 @@ public class TileTrap : MonoBehaviour
         {
             collision.gameObject.GetComponent<MovementPlayer>().TakeLife();
         }
-        collision.gameObject.transform.position = collision.gameObject.GetComponent<MovementPlayer>().Checkpoint;
+        collision.gameObject.transform.position = collision.gameObject.GetComponent<MovementPlayer>().lastPosition;
     }
 }

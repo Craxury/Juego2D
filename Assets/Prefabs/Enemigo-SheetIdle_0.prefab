@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2662051042857479374}
   - component: {fileID: 774229606172704999}
   - component: {fileID: 5901175046775939871}
+  - component: {fileID: -988008187656310881}
   m_Layer: 0
   m_Name: Enemigo-SheetIdle_0
   m_TagString: Untagged
@@ -106,3 +107,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-988008187656310881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8793822595485180392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a2eb86cced57248bc827238a81c355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedEnemy: 0
+  posMid: {x: 0, y: 0, z: 0}
+  posEnd: {x: 0, y: 0, z: 0}
+  drop: []

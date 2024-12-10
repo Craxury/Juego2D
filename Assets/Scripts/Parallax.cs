@@ -19,7 +19,7 @@ public class Parallax : MonoBehaviour
     void LateUpdate()
     {
         Vector3 distance = camera.position - lastPositionCamera;
-        transform.position += new Vector3 (effectParallax * distance.x, distance.y, 0);
+        transform.position += new Vector3 (effectParallax * distance.x, 0, 0);
         lastPositionCamera = camera.position;
     }
 }
