@@ -106,7 +106,7 @@ public class MovementPlayer : MonoBehaviour
         spritePlayer.color = Color.white;
     }
 
-    private void Checkpoints()
+    public void Checkpoints()
     {
         if (PlayerPrefs.GetInt("chekpoint") != 0)
         {
