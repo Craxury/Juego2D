@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MovementPlayer : MonoBehaviour
 {
@@ -11,8 +13,10 @@ public class MovementPlayer : MonoBehaviour
     [Space]
 
     public int numLife;
-    public int maxLife;
-    private int scorePlayer;
+
+    public int numLifeMax;
+    private int scoreGeneral;
+    public int numKills;
 
     [Space]
 
@@ -25,8 +29,15 @@ public class MovementPlayer : MonoBehaviour
 
     private ControlHud controlHud;
     private Rigidbody2D phisicsPlayer;
+    public Canvas HUD;
     private Animator anim;
     private SpriteRenderer spritePlayer;
+    public GameObject balas;
+    public int magicAmmount;
+    private Ammo amunnition;
+    public float lastTimeShoot;
+
+    public HPBar barraVida;
     
 
 
@@ -35,11 +46,16 @@ public class MovementPlayer : MonoBehaviour
         phisicsPlayer = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spritePlayer = GetComponent<SpriteRenderer>();
+        amunnition = balas.GetComponent<Ammo>();
         vulnerable = true;
-        controlHud = GetComponent<ControlHud>();
-        gameObject.transform.position = Checkpoint[PlayerPrefs.GetInt("checkpoint")];
-        scorePlayer = 0;
-        numLife = maxLife;
+        controlHud = HUD.GetComponent<ControlHud>();
+        //gameObject.transform.position = Checkpoint[PlayerPrefs.GetInt("checkpoint")];
+        scoreGeneral = 0;
+        numLife = 100;
+        numLifeMax = numLife;
+        numKills = 15;
+        Debug.Log("StartnumLife: " + numLife);
+        Debug.Log("StartnumLifeMax: " + numLifeMax);
     }
 
     void Update()
@@ -48,6 +64,9 @@ public class MovementPlayer : MonoBehaviour
         Jump();
         Checkpoints();
         TouchFloor();
+        AddLife();
+        if (Time.time - lastTimeShoot >= 0.5f)
+        { Shooting();}
     }
 
     private void Movement()
@@ -75,6 +94,24 @@ public class MovementPlayer : MonoBehaviour
         }
     }
 
+    private void Shooting()
+    {
+        if(TouchFloor() && Input.GetKeyDown(KeyCode.Z) && magicAmmount != 0)
+        {
+            anim.Play("Shoot");
+            lastTimeShoot = Time.time;
+            magicAmmount--;
+            amunnition.useMagic(magicAmmount);
+            if (spritePlayer.flipX)
+            {
+                Instantiate(balas, transform.position - new Vector3 (-3f, 0, 0), quaternion.identity);
+            }
+            else 
+            {
+                Instantiate(balas, transform.position + new Vector3(2f, 0, 0), quaternion.identity);
+            }
+        }
+    }
     private bool TouchFloor()
     {
         RaycastHit2D touch = Physics2D.Raycast(transform.position + new Vector3(0, -2f, 0), Vector2.down, 0.2f);
@@ -90,14 +127,17 @@ public class MovementPlayer : MonoBehaviour
         }
     }
 
-    public void TakeLife()
+    public void TakeLife(int damage)
     {
         if (vulnerable)
         {
-            numLife--;
+            //control de la vida
+            numLife += damage;
+            //control de la barra de vida
+            barraVida.minusLife(damage);
             vulnerable = false;
             spritePlayer.color = Color.red;
-            if (numLife == 0)
+            if (numLife <= 0)
             {
                 Destroy(gameObject);
             }
@@ -113,13 +153,28 @@ public class MovementPlayer : MonoBehaviour
 
     public void AddScore(int score)
     {
-        scorePlayer += score;
-        controlHud.setTextScore(scorePlayer);
+        scoreGeneral += score;
+        controlHud.setTextScore(scoreGeneral);
     }
 
-    public void AddLife(int life)
+    public void AddMaxLife(int addLife)
     {
-        maxLife += life;
+        numLifeMax += addLife;
+        barraVida.setMaxLife(numLifeMax);
+    }
+
+    public void AddLife()
+    {
+        if (Input.GetKeyDown(KeyCode.H) && numLife < numLifeMax && numKills >= 5)
+        {
+            numLife += 25;
+            barraVida.addLife(25);
+            numKills = numKills - 5;
+            Debug.Log("numLife: " + numLife);
+            Debug.Log("numKills: " + numKills);
+        }
+        else{}
+        
     }
 
     private void Checkpoints()

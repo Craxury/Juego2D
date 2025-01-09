@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Floor
   - TileTrap
+  - Vida
+  - Score
   layers:
   - Default
   - TransparentFX

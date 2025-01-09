@@ -55,7 +55,7 @@ public class ControlEnemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<MovementPlayer>().TakeLife();
+            collision.gameObject.GetComponent<MovementPlayer>().TakeLife(30);
         }
     }
 }
