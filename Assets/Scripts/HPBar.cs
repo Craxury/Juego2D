@@ -18,13 +18,14 @@ public class HPBar : MonoBehaviour
         sliderLife.value += addLife;
     }
 
-    public void minusLife(int takeDamage)
+    public void minusLife(int numLife)
     {
-        sliderLife.value -= takeDamage;
+        sliderLife.value = numLife;
     }
 
-    public void setMaxLife(int AddMaxLife)
+    public void setMaxLife(int numMaxLife)
     {
-        sliderLife.maxValue += AddMaxLife;
+        sliderLife.maxValue = numMaxLife;
+        sliderLife.value = numMaxLife;
     }
 }

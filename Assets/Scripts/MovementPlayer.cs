@@ -33,6 +33,7 @@ public class MovementPlayer : MonoBehaviour
     private Animator anim;
     private SpriteRenderer spritePlayer;
     public GameObject balas;
+    public GameObject Magic;
     public int magicAmmount;
     private Ammo amunnition;
     public float lastTimeShoot;
@@ -98,17 +99,17 @@ public class MovementPlayer : MonoBehaviour
     {
         if(TouchFloor() && Input.GetKeyDown(KeyCode.Z) && magicAmmount != 0)
         {
-            anim.Play("Shoot");
+            //anim.Play("Shoot");
             lastTimeShoot = Time.time;
             magicAmmount--;
             amunnition.useMagic(magicAmmount);
-            if (spritePlayer.flipX)
+            if (spritePlayer.flipX == false)
             {
-                Instantiate(balas, transform.position - new Vector3 (-3f, 0, 0), quaternion.identity);
+                Instantiate(Magic, transform.position + new Vector3 (-3f, 0, 0), quaternion.identity);
             }
             else 
             {
-                Instantiate(balas, transform.position + new Vector3(2f, 0, 0), quaternion.identity);
+                Instantiate(Magic, transform.position + new Vector3(2f, 0, 0), quaternion.identity);
             }
         }
     }
@@ -132,9 +133,9 @@ public class MovementPlayer : MonoBehaviour
         if (vulnerable)
         {
             //control de la vida
-            numLife += damage;
+            numLife -= damage;
             //control de la barra de vida
-            barraVida.minusLife(damage);
+            barraVida.minusLife(numLife);
             vulnerable = false;
             spritePlayer.color = Color.red;
             if (numLife <= 0)
@@ -161,6 +162,7 @@ public class MovementPlayer : MonoBehaviour
     {
         numLifeMax += addLife;
         barraVida.setMaxLife(numLifeMax);
+        numLife = numLifeMax;
     }
 
     public void AddLife()
@@ -172,6 +174,10 @@ public class MovementPlayer : MonoBehaviour
             numKills = numKills - 5;
             Debug.Log("numLife: " + numLife);
             Debug.Log("numKills: " + numKills);
+        }
+        else if(numLife > numLifeMax)
+        {
+            numLife = numLifeMax;
         }
         else{}
         

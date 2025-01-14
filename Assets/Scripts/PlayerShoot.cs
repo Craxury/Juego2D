@@ -19,8 +19,8 @@ public class PlayerShoot : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
 
         if (player.GetComponent<SpriteRenderer>().flipX == false)
-        { moveForward = 1; }
-        else { moveForward = -1; }
+        { moveForward = -1; }
+        else { moveForward = 1; }
     }
 
     // Update is called once per frame

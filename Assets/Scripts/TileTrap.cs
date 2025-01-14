@@ -7,7 +7,7 @@ public class TileTrap : MonoBehaviour
     private int damage;
     void Start()
     {
-        damage = -20;
+        damage = 20;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
