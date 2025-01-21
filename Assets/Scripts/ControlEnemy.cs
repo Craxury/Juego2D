@@ -17,36 +17,53 @@ public class ControlEnemy : MonoBehaviour
 
     private Animator anim;
 
+    public float HP;
+    public float currentHP;
+    public float armor;
+    private bool dead;
+
     [Space]
 
     public GameObject[] drop;
 
     private SpriteRenderer sprite;
     private float lastPositionX;
-    private Rigidbody2D phisicsEnemy;
+    private PlayerShoot weapon;
+    private bool vulnerable;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
-        phisicsEnemy = GetComponent<Rigidbody2D>();
+        weapon = GetComponent<PlayerShoot>();
         anim = gameObject.GetComponent<Animator>();
         posInitial = transform.position;
         moveToEnd = 0;
+        currentHP = HP;
+        dead = false;
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(moveToEnd == 0)
+        movementZone();
+        flipX();
+        anima(); 
+    }
+
+    public void movementZone()
+    {
+        if(moveToEnd == 0 && dead == false)
         {
             posDestiny = posMid;
         }
-        else if (moveToEnd == 1)
+        else if (moveToEnd == 1 && dead == false)
         {
             posDestiny = posEnd;
         }
-        else
+        else if (moveToEnd == 2 && dead == false)
         {
             posDestiny = posInitial;
         }
@@ -57,16 +74,46 @@ public class ControlEnemy : MonoBehaviour
         if(transform.position == posEnd) moveToEnd = 2;
         if(transform.position == posInitial) moveToEnd = 0;
 
-        flipX();
-        anima();
+    }
 
-        
+    public void TakeDamage(int damage)
+    {
+        currentHP -= damage / armor;
+        vulnerable = false;
+        sprite.color = Color.red;
+            if (currentHP <= 0)
+        {
+            StopAllCoroutines();
+            StartCoroutine("Dying");
+        }
+        StartCoroutine("Movement");
+    }
+
+    IEnumerator Dying()
+    {
+        dead = true;
+        posDestiny = transform.position;
+        velocity = 0;
+        sprite.color = Color.white;
+        vulnerable = true;
+        anim.SetTrigger("Death");
+        yield return new WaitForSeconds(1f);
+        velocity = 0;
+        Destroy(gameObject);
+    }
+
+    IEnumerator Movement()
+    {
+        vulnerable = true;
+        velocity = 0;
+        yield return new WaitForSeconds(0.5f);
+        velocity = 5;
+        sprite.color = Color.white;
     }
 
     private void anima()
     {
-        phisicsEnemy.velocity = new Vector2(velocity, phisicsEnemy.velocity.y);
-        anim.SetFloat("Velocity",phisicsEnemy.velocity.magnitude);
+        anim.SetFloat("Velocity",velocity);
     }
     private void flipX()
     {
@@ -83,7 +130,7 @@ public class ControlEnemy : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && dead == false)
         {
             collision.gameObject.GetComponent<MovementPlayer>().TakeLife(30);
         }

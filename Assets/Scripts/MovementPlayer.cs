@@ -39,6 +39,9 @@ public class MovementPlayer : MonoBehaviour
     public float lastTimeShoot;
 
     public HPBar barraVida;
+    public HPRecovery barraRecovery;
+
+
     
 
 
@@ -83,6 +86,14 @@ public class MovementPlayer : MonoBehaviour
         else if (phisicsPlayer.velocity.x > 0f)
         {
             spritePlayer.flipX = true;
+        }
+    }
+
+    public void RechargeMagic()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && magicAmmount < 5)
+        {
+            magicAmmount = 5;
         }
     }
 
@@ -171,6 +182,7 @@ public class MovementPlayer : MonoBehaviour
         {
             numLife += 25;
             barraVida.addLife(25);
+            barraRecovery.minusRecovery(5);
             numKills = numKills - 5;
             Debug.Log("numLife: " + numLife);
             Debug.Log("numKills: " + numKills);

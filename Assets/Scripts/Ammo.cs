@@ -29,6 +29,7 @@ public class Ammo : MonoBehaviour
             }
         }
     }*/
+    
 
     public void useMagic(int num)
     {

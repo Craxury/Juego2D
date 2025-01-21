@@ -8,6 +8,7 @@ TagManager:
   - TileTrap
   - Vida
   - Score
+  - Enemy
   layers:
   - Default
   - TransparentFX
