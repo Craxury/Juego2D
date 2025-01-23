@@ -8,27 +8,35 @@ using UnityEngine;
 public class Ammo : MonoBehaviour
 {
     public GameObject[] balas;
+    private MovementPlayer player;
     //public GameObject numMagicExtra;
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<MovementPlayer>();
         foreach (var item in balas)
         {
             item.SetActive(true);
         }
     }
 
-    /*public void getMagic(int num)
+    void Update()
     {
-        for (int i = 0, x = 0; i < 5 && x < num; i++)
+        getMagic();
+    }
+
+    public void getMagic()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            if(balas[i].activeSelf == false)
+            for (int i = 0, x = 0; i < 5; i++)
             {
                 balas[i].SetActive(true);
-                x++;
             }
+            player.magicAmmount = 5;
         }
-    }*/
+        
+    }
     
 
     public void useMagic(int num)

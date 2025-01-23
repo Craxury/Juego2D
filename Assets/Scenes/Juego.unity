@@ -1866,7 +1866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -988008187656310881, guid: 89323189f4e95924aa4f0f1299777b76, type: 3}
       propertyPath: armor
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -988008187656310881, guid: 89323189f4e95924aa4f0f1299777b76, type: 3}
       propertyPath: posEnd.x
@@ -1896,6 +1896,10 @@ PrefabInstance:
       propertyPath: speedEnemy
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: -988008187656310881, guid: 89323189f4e95924aa4f0f1299777b76, type: 3}
+      propertyPath: barraRecovery
+      value: 
+      objectReference: {fileID: 657004645}
     - target: {fileID: 2662051042857479374, guid: 89323189f4e95924aa4f0f1299777b76, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.31
@@ -6173,7 +6177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3324369077818929962, guid: be9c6cd5d5ad51f41b70212760e6d76b, type: 3}
       propertyPath: numKills
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3324369077818929962, guid: be9c6cd5d5ad51f41b70212760e6d76b, type: 3}
       propertyPath: barraVida

@@ -89,14 +89,6 @@ public class MovementPlayer : MonoBehaviour
         }
     }
 
-    public void RechargeMagic()
-    {
-        if (Input.GetKeyDown(KeyCode.R) && magicAmmount < 5)
-        {
-            magicAmmount = 5;
-        }
-    }
-
     private void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && TouchFloor())
@@ -178,6 +170,11 @@ public class MovementPlayer : MonoBehaviour
 
     public void AddLife()
     {
+        if( numKills > 15)
+        {
+            numKills = 15;
+        }
+        
         if (Input.GetKeyDown(KeyCode.H) && numLife < numLifeMax && numKills >= 5)
         {
             numLife += 25;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ControlEnemy : MonoBehaviour
@@ -30,10 +31,15 @@ public class ControlEnemy : MonoBehaviour
     private float lastPositionX;
     private PlayerShoot weapon;
     private bool vulnerable;
+    private MovementPlayer player;
+    private int killcount;
+    public HPRecovery barraRecovery;
+    private bool attack;
 
     // Start is called before the first frame update
     void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<MovementPlayer>();
         sprite = GetComponent<SpriteRenderer>();
         weapon = GetComponent<PlayerShoot>();
         anim = gameObject.GetComponent<Animator>();
@@ -41,7 +47,7 @@ public class ControlEnemy : MonoBehaviour
         moveToEnd = 0;
         currentHP = HP;
         dead = false;
-
+        killcount = player.GetComponent<MovementPlayer>().numKills;
 
     }
 
@@ -51,6 +57,26 @@ public class ControlEnemy : MonoBehaviour
         movementZone();
         flipX();
         anima(); 
+        RayChecking();
+    }
+
+    public void RayChecking()
+    {
+        RaycastHit2D rayCheck;
+        if (sprite.flipX == true)
+        {
+            rayCheck = Physics2D.Raycast(transform.position + new Vector3(1.5f, 0, 0), Vector2.right, 0.8f);
+        }
+        else
+        {
+            rayCheck = Physics2D.Raycast(transform.position + new Vector3(-1.5f, 0, 0), Vector2.left, 0.8f);   
+        }
+
+        if (rayCheck.collider != null && rayCheck.collider.gameObject.CompareTag("Player") && attack == false)
+        {
+            attack = true;
+            StartCoroutine("Attack");
+        }
     }
 
     public void movementZone()
@@ -99,6 +125,8 @@ public class ControlEnemy : MonoBehaviour
         anim.SetTrigger("Death");
         yield return new WaitForSeconds(1f);
         velocity = 0;
+        player.numKills++;
+        barraRecovery.addLife(1);
         Destroy(gameObject);
     }
 
@@ -117,11 +145,11 @@ public class ControlEnemy : MonoBehaviour
     }
     private void flipX()
     {
-        if (lastPositionX - transform.position.x > 0)
+        if (lastPositionX - transform.position.x > 0f)
         {
             sprite.flipX = false;
         }
-        else
+        else if (lastPositionX - transform.position.x < 0f)
         {
             sprite.flipX = true;
         }
@@ -132,7 +160,35 @@ public class ControlEnemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && dead == false)
         {
-            collision.gameObject.GetComponent<MovementPlayer>().TakeLife(30);
+            collision.gameObject.GetComponent<MovementPlayer>().TakeLife(10);
         }
+    }
+
+    private void CreateRay()
+    {
+        RaycastHit2D rayCheck;
+        if (sprite.flipX == true)
+        {
+            rayCheck = Physics2D.Raycast(transform.position + new Vector3(1.5f, 0, 0), Vector2.right, 0.8f);
+        }
+        else
+        {
+            rayCheck = Physics2D.Raycast(transform.position + new Vector3(-1.5f, 0, 0), Vector2.left, 0.8f);   
+        }
+
+        if (rayCheck.collider != null && rayCheck.collider.gameObject.CompareTag("Player"))
+        {
+            rayCheck.collider.gameObject.GetComponent<MovementPlayer>().TakeLife(30);
+        }
+    }
+
+    IEnumerator Attack()
+    {
+        anim.SetTrigger("Attack");
+        velocity = 0;
+        yield return new WaitForSeconds(1.2f);
+        velocity = 5;
+        attack = false;
+        StopCoroutine("Attack");
     }
 }
