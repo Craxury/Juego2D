@@ -7,7 +7,9 @@ using UnityEngine.UI;
 
 public class MovementPlayer : MonoBehaviour
 {
-    public float velX;
+    public float velX = 5f;
+    private float velN = 5f;
+    private float dash = 7f;
     public int JumpForce;
     
     [Space]
@@ -40,6 +42,7 @@ public class MovementPlayer : MonoBehaviour
 
     public HPBar barraVida;
     public HPRecovery barraRecovery;
+    private int nivelVida;
 
 
     
@@ -58,6 +61,7 @@ public class MovementPlayer : MonoBehaviour
         numLife = 100;
         numLifeMax = numLife;
         numKills = 15;
+        nivelVida = 1;
         Debug.Log("StartnumLife: " + numLife);
         Debug.Log("StartnumLifeMax: " + numLifeMax);
     }
@@ -78,6 +82,12 @@ public class MovementPlayer : MonoBehaviour
         float InputX = Input.GetAxis("Horizontal");
         phisicsPlayer.velocity = new Vector2(InputX * velX, phisicsPlayer.velocity.y);
         anim.SetFloat("velX",phisicsPlayer.velocity.magnitude);
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            velX = dash;
+        }
+        else{ velX = velN;}
 
         if(phisicsPlayer.velocity.x < -0f)
         {
@@ -149,6 +159,7 @@ public class MovementPlayer : MonoBehaviour
         }
     }
 
+
     private void MakeVulnerable()
     {
         vulnerable = true;
@@ -164,6 +175,7 @@ public class MovementPlayer : MonoBehaviour
     public void AddMaxLife(int addLife)
     {
         numLifeMax += addLife;
+        nivelVida++;
         barraVida.setMaxLife(numLifeMax);
         numLife = numLifeMax;
     }
@@ -177,8 +189,8 @@ public class MovementPlayer : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.H) && numLife < numLifeMax && numKills >= 5)
         {
-            numLife += 25;
-            barraVida.addLife(25);
+            numLife += 25 + nivelVida * 3;
+            barraVida.addLife(25 + nivelVida * 3);
             barraRecovery.minusRecovery(5);
             numKills = numKills - 5;
             Debug.Log("numLife: " + numLife);
