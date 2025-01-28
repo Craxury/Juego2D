@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -741613003667070527}
   m_Layer: 0
   m_Name: Magic
-  m_TagString: Untagged
+  m_TagString: balas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMagic: 25
   lifeTimeMagic: 0.5
+  weapon: 0
+  lvlweapon: 0
+  TakeDamage: {fileID: 0}
 --- !u!50 &-8145689804457680390
 Rigidbody2D:
   serializedVersion: 4

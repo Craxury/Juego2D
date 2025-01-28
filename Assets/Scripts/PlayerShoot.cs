@@ -19,7 +19,6 @@ public class PlayerShoot : MonoBehaviour
     void Awake()
     {
         startTime = Time.time;
-        //anim = gameObject.GetComponent<Animator>();
         moveForward = 1;
         player = GameObject.FindGameObjectWithTag("Player");
 

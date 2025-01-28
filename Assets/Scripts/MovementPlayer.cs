@@ -39,10 +39,13 @@ public class MovementPlayer : MonoBehaviour
     public int magicAmmount;
     private Ammo amunnition;
     public float lastTimeShoot;
+    private PlayerShoot balas2;
 
     public HPBar barraVida;
     public HPRecovery barraRecovery;
     private int nivelVida;
+    public bool powerB;
+    private int ataque;
 
 
     
@@ -56,14 +59,12 @@ public class MovementPlayer : MonoBehaviour
         amunnition = balas.GetComponent<Ammo>();
         vulnerable = true;
         controlHud = HUD.GetComponent<ControlHud>();
-        //gameObject.transform.position = Checkpoint[PlayerPrefs.GetInt("checkpoint")];
         scoreGeneral = 0;
         numLife = 100;
         numLifeMax = numLife;
         numKills = 15;
         nivelVida = 1;
-        Debug.Log("StartnumLife: " + numLife);
-        Debug.Log("StartnumLifeMax: " + numLifeMax);
+        powerB = true;
     }
 
     void Update()
@@ -73,6 +74,7 @@ public class MovementPlayer : MonoBehaviour
         Checkpoints();
         TouchFloor();
         AddLife();
+        Power();
         if (Time.time - lastTimeShoot >= 0.5f)
         { Shooting();}
     }
@@ -83,11 +85,18 @@ public class MovementPlayer : MonoBehaviour
         phisicsPlayer.velocity = new Vector2(InputX * velX, phisicsPlayer.velocity.y);
         anim.SetFloat("velX",phisicsPlayer.velocity.magnitude);
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (powerB == true)
         {
-            velX = dash;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                velX = dash;
+            }
+            else
+            { 
+                velX = velN;
+            }
         }
-        else{ velX = velN;}
+        
 
         if(phisicsPlayer.velocity.x < -0f)
         {
@@ -136,7 +145,6 @@ public class MovementPlayer : MonoBehaviour
         }
         else
         {
-            Debug.Log("nada");
             return false;
         }
     }
@@ -202,6 +210,27 @@ public class MovementPlayer : MonoBehaviour
         }
         else{}
         
+    }
+
+    public void Power()
+    {
+        if (Input.GetKeyDown(KeyCode.C) && powerB == true)
+        {
+            powerB = false;
+            StartCoroutine(PowerBoss());
+        }
+    }
+
+    IEnumerator PowerBoss()
+    {
+        numLife += 25 + nivelVida * 10;
+        barraVida.addLife(25 + nivelVida * 10);
+        velX = dash + 1;
+        yield return new WaitForSeconds(7f);
+        velX = velN;
+        yield return new WaitForSeconds(15f);
+        StopCoroutine(PowerBoss());
+        powerB = true;
     }
 
     private void Checkpoints()

@@ -16,7 +16,7 @@ public class ControlHud : MonoBehaviour
 
     public void setTextScore(int numScore)
     {
-        textScore.text = "Score: " + numScore.ToString();
+        textScore.text = "Monedas: " + numScore.ToString();
     }
 
     public void setImageLost()

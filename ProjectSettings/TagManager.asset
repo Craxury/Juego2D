@@ -9,6 +9,7 @@ TagManager:
   - Vida
   - Score
   - Enemy
+  - balas
   layers:
   - Default
   - TransparentFX

@@ -29,7 +29,7 @@ public class Ammo : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            for (int i = 0, x = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 balas[i].SetActive(true);
             }
