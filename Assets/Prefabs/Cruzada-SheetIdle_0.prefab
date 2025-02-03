@@ -125,7 +125,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdad013acb9fd4a49a3028131f1b2dd1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -186,11 +186,15 @@ MonoBehaviour:
   velX: 6
   JumpForce: 7
   numLife: 3
-  maxLife: 3
+  numLifeMax: 0
   numKills: 0
   Checkpoint: []
   lastPosition: {x: 0, y: 0, z: 0}
   HUD: {fileID: 0}
   balas: {fileID: 0}
+  Magic: {fileID: 0}
   magicAmmount: 0
   lastTimeShoot: 0
+  barraVida: {fileID: 0}
+  barraRecovery: {fileID: 0}
+  powerB: 0

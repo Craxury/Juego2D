@@ -13,7 +13,8 @@ public class PlayerShoot : MonoBehaviour
     public int weapon;
     public int lvlweapon;
 
-
+    private Rigidbody2D phisicsMagic;
+    private SpriteRenderer spriteMagic;
     public ControlEnemy TakeDamage;
     // Start is called before the first frame update
     void Awake()
@@ -21,12 +22,23 @@ public class PlayerShoot : MonoBehaviour
         startTime = Time.time;
         moveForward = 1;
         player = GameObject.FindGameObjectWithTag("Player");
+        spriteMagic = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
 
         if (player.GetComponent<SpriteRenderer>().flipX == false)
         { moveForward = -1; }
         else { moveForward = 1; }
         lvlweapon = 5;
         weapon = lvlweapon;
+
+        if(player.GetComponent<SpriteRenderer>().flipX == false)
+        {
+            spriteMagic.flipX = false;
+        }
+        else
+        {
+            spriteMagic.flipX = true;
+        }
     }
 
     // Update is called once per frame
@@ -36,14 +48,14 @@ public class PlayerShoot : MonoBehaviour
         Vector3 posDestiny = new Vector3 (1000 * moveForward, transform.position.y, 0);
         transform.position = Vector3.MoveTowards (transform.position, posDestiny, speedMagic * Time.deltaTime);
         weapon = lvlweapon;
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
-            EndMagic();
-            Invoke("ExplodeMagic", 0.3f);
+            StartCoroutine("EndMagic");
         }
     }
 
@@ -52,27 +64,24 @@ public class PlayerShoot : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<ControlEnemy>().TakeDamage(weapon);
-            EndMagic();
-            Invoke("ExplodeMagic", 0.3f);
+            StartCoroutine("EndMagic");
         }
     }
 
-    public void EndMagic()
+    IEnumerator EndMagic()
     {
         speedMagic = 0;
-        //anim.Play("impacto");
-    }
-
-    private void ExplodeMagic()
-    {
+        anim.SetTrigger("Explo");
+        yield return new WaitForSeconds(0.4f);
         Destroy(this.gameObject);
+        StopCoroutine("EndMagic");
     }
 
     private void CheckLifeTime()
     {
         if (Time.time - startTime > lifeTimeMagic)
         {
-            Destroy(this.gameObject);
+            StartCoroutine("EndMagic");
         }
     }
 }

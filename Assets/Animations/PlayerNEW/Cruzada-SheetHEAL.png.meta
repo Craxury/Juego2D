@@ -1,0 +1,367 @@
+fileFormatVersion: 2
+guid: 41facf39b4032a1448695b63fd9e8d93
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 72
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Cruzada-SheetHEAL_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      physicsShape:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 812fc7d6f0be5b14e84b0f2c49a9a77c
+      internalID: -673198059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cruzada-SheetHEAL_1
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      physicsShape:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1685fc76ac5ad7541b08ce090dd36e55
+      internalID: 1193792018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cruzada-SheetHEAL_2
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      physicsShape:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b778338835e93141a6813601ed183ab
+      internalID: -767935596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cruzada-SheetHEAL_3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      physicsShape:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6722195fc69c874394a85d62f80d174
+      internalID: 419150816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cruzada-SheetHEAL_4
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      physicsShape:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e37051b0adcacc4283ce7ea00de3e32
+      internalID: -1096869552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cruzada-SheetHEAL_5
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      physicsShape:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8225364fd174cd42a4932db8d584231
+      internalID: -1410025383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cruzada-SheetHEAL_6
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      physicsShape:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94cadd00f1aa3154297793927006e0dd
+      internalID: -1155522569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cruzada-SheetHEAL_7
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      physicsShape:
+      - - {x: 0, y: -36}
+        - {x: 36, y: 0}
+        - {x: 0, y: 36}
+        - {x: -36, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87f45f0928358f9408fb1633b32e2436
+      internalID: 504568849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Cruzada-SheetHEAL_0: -673198059
+      Cruzada-SheetHEAL_1: 1193792018
+      Cruzada-SheetHEAL_2: -767935596
+      Cruzada-SheetHEAL_3: 419150816
+      Cruzada-SheetHEAL_4: -1096869552
+      Cruzada-SheetHEAL_5: -1410025383
+      Cruzada-SheetHEAL_6: -1155522569
+      Cruzada-SheetHEAL_7: 504568849
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

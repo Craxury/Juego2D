@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -5892612398989492376}
   - component: {fileID: -8145689804457680390}
   - component: {fileID: -741613003667070527}
+  - component: {fileID: 4633520199834074275}
   m_Layer: 0
   m_Name: Magic
   m_TagString: balas
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 8e34d873fcc0fb74eb3596b90dfb3572, type: 3}
+  m_Sprite: {fileID: 1221198035, guid: f8cd2c03e33b5c34cb596e17c7b5df3c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e703f41a9fd66b4f925bbd420979450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMagic: 25
+  speedMagic: 15
   lifeTimeMagic: 0.5
   weapon: 0
   lvlweapon: 0
@@ -163,6 +164,27 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: -0.09175897, y: 0}
+  m_Size: {x: 1.2459922, y: 1.2459922}
   m_Direction: 0
+--- !u!95 &4633520199834074275
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945405336311225057}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8d52a96914a39514688d4328a31b5f05, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

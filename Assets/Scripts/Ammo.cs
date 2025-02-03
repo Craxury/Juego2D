@@ -9,6 +9,8 @@ public class Ammo : MonoBehaviour
 {
     public GameObject[] balas;
     private MovementPlayer player;
+
+
     //public GameObject numMagicExtra;
     // Start is called before the first frame update
     void Start()
@@ -22,7 +24,10 @@ public class Ammo : MonoBehaviour
 
     void Update()
     {
+        
         getMagic();
+
+        
     }
 
     public void getMagic()
@@ -50,7 +55,6 @@ public class Ammo : MonoBehaviour
             foreach(var item in balas)
             {
                 item.SetActive(true);
-                //numMagicExtra.gameObject.SetActive(false);
             }
         }
         else 
@@ -59,8 +63,6 @@ public class Ammo : MonoBehaviour
             {
                 balas[i].SetActive(false);
             }
-            //numMagicExtra.SetActive(true);
-            //numMagicExtra.GetComponent<TextMeshProUGUI>().text = num + "X";
         }
     }
 }

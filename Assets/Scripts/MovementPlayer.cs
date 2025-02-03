@@ -10,6 +10,7 @@ public class MovementPlayer : MonoBehaviour
     public float velX = 5f;
     private float velN = 5f;
     private float dash = 7f;
+    private float velHeal = 0f;
     public int JumpForce;
     
     [Space]
@@ -46,6 +47,8 @@ public class MovementPlayer : MonoBehaviour
     private int nivelVida;
     public bool powerB;
     private int ataque;
+    private bool isattacking;
+    private bool ishealing;
 
 
     
@@ -87,9 +90,13 @@ public class MovementPlayer : MonoBehaviour
 
         if (powerB == true)
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && ishealing == false && isattacking == false)
             {
                 velX = dash;
+            }
+            else if (ishealing == true || isattacking == true)
+            {
+                velX =  velHeal;
             }
             else
             { 
@@ -112,39 +119,60 @@ public class MovementPlayer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && TouchFloor())
         {
-            phisicsPlayer.velocity = new Vector2(phisicsPlayer.velocity.x, 0);
-            phisicsPlayer.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+            StartCoroutine("JumpPlayer");
         }
+    }
+
+    IEnumerator JumpPlayer()
+    {
+        anim.SetTrigger("Jump");
+        phisicsPlayer.velocity = new Vector2(phisicsPlayer.velocity.x, 0);
+        phisicsPlayer.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(2f);
+        StopCoroutine("JumpPlayer");
     }
 
     private void Shooting()
     {
-        if(TouchFloor() && Input.GetKeyDown(KeyCode.Z) && magicAmmount != 0)
+        if(TouchFloor() && Input.GetKeyDown(KeyCode.Z) && magicAmmount != 0 && isattacking == false)
         {
-            //anim.Play("Shoot");
-            lastTimeShoot = Time.time;
-            magicAmmount--;
-            amunnition.useMagic(magicAmmount);
-            if (spritePlayer.flipX == false)
-            {
-                Instantiate(Magic, transform.position + new Vector3 (-3f, 0, 0), quaternion.identity);
-            }
-            else 
-            {
-                Instantiate(Magic, transform.position + new Vector3(2f, 0, 0), quaternion.identity);
-            }
+            StartCoroutine("Attacking");
         }
+    }
+
+    IEnumerator Attacking()
+    {
+        isattacking = true;
+        anim.SetBool("AttackBool", true);
+        anim.SetTrigger("Attack");
+        yield return new WaitForSeconds(0.65f);
+        lastTimeShoot = Time.time;
+        magicAmmount--;
+        amunnition.useMagic(magicAmmount);
+        if (spritePlayer.flipX == false)
+        {
+            Instantiate(Magic, transform.position + new Vector3 (-3f, 0, 0), quaternion.identity);
+        }
+        else 
+        {
+            Instantiate(Magic, transform.position + new Vector3(2f, 0, 0), quaternion.identity);
+        }
+        anim.SetBool("AttackBool", false);
+        isattacking = false;
+        StopCoroutine("Attacking");
     }
     private bool TouchFloor()
     {
         RaycastHit2D touch = Physics2D.Raycast(transform.position + new Vector3(0, -2f, 0), Vector2.down, 0.2f);
         if(touch.collider != null && touch.collider.gameObject.CompareTag("Floor"))
         {
+            anim.SetBool("Floor", true);
             lastPosition=gameObject.transform.position;
             return true;
         }
         else
         {
+            anim.SetBool("Floor", false);
             return false;
         }
     }
@@ -163,7 +191,7 @@ public class MovementPlayer : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-            Invoke("MakeVulnerable", 1f);
+            Invoke("MakeVulnerable", 0.5f);
         }
     }
 
@@ -195,14 +223,9 @@ public class MovementPlayer : MonoBehaviour
             numKills = 15;
         }
         
-        if (Input.GetKeyDown(KeyCode.H) && numLife < numLifeMax && numKills >= 5)
+        if (Input.GetKeyDown(KeyCode.H) && numLife < numLifeMax && numKills >= 5 && ishealing == false)
         {
-            numLife += 25 + nivelVida * 3;
-            barraVida.addLife(25 + nivelVida * 3);
-            barraRecovery.minusRecovery(5);
-            numKills = numKills - 5;
-            Debug.Log("numLife: " + numLife);
-            Debug.Log("numKills: " + numKills);
+            StartCoroutine("Healing");
         }
         else if(numLife > numLifeMax)
         {
@@ -210,6 +233,21 @@ public class MovementPlayer : MonoBehaviour
         }
         else{}
         
+    }
+
+    IEnumerator Healing()
+    {
+        ishealing = true;
+        anim.SetTrigger("Heal");
+        anim.SetBool("healing", true);
+        numLife += 25 + nivelVida * 3;
+        barraVida.addLife(25 + nivelVida * 3);
+        barraRecovery.minusRecovery(5);
+        numKills = numKills - 5;
+        yield return new WaitForSeconds(1.1f);
+        anim.SetBool("healing", false);
+        ishealing = false;
+        StopCoroutine("Healing");
     }
 
     public void Power()

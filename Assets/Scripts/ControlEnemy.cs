@@ -127,6 +127,7 @@ public class ControlEnemy : MonoBehaviour
         velocity = 0;
         player.numKills++;
         barraRecovery.addLife(1);
+        drop[Random.Range(0,1)].SetActive(gameObject);
         Destroy(gameObject);
     }
 
