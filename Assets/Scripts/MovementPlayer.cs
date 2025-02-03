@@ -125,7 +125,6 @@ public class MovementPlayer : MonoBehaviour
 
     IEnumerator JumpPlayer()
     {
-        anim.SetTrigger("Jump");
         phisicsPlayer.velocity = new Vector2(phisicsPlayer.velocity.x, 0);
         phisicsPlayer.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         yield return new WaitForSeconds(2f);

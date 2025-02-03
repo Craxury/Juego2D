@@ -127,7 +127,6 @@ public class ControlEnemy : MonoBehaviour
         velocity = 0;
         player.numKills++;
         barraRecovery.addLife(1);
-        drop[Random.Range(0,1)].SetActive(gameObject);
         Destroy(gameObject);
     }
 
@@ -138,6 +137,7 @@ public class ControlEnemy : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         velocity = 5;
         sprite.color = Color.white;
+        RayChecking();
     }
 
     private void anima()
@@ -170,11 +170,11 @@ public class ControlEnemy : MonoBehaviour
         RaycastHit2D rayCheck;
         if (sprite.flipX == true)
         {
-            rayCheck = Physics2D.Raycast(transform.position + new Vector3(1.5f, 0, 0), Vector2.right, 0.8f);
+            rayCheck = Physics2D.Raycast(transform.position + new Vector3(0, 0, 0), Vector2.right, 0.8f);
         }
         else
         {
-            rayCheck = Physics2D.Raycast(transform.position + new Vector3(-1.5f, 0, 0), Vector2.left, 0.8f);   
+            rayCheck = Physics2D.Raycast(transform.position + new Vector3(0, 0, 0), Vector2.left, 0.8f);   
         }
 
         if (rayCheck.collider != null && rayCheck.collider.gameObject.CompareTag("Player"))
