@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class MovementPlayer : MonoBehaviour
 {
     public float velX = 5f;
-    private float velN = 5f;
+    public float velN = 5f;
     private float dash = 7f;
-    private float velHeal = 0f;
+    public float velHeal = 0f;
     public int JumpForce;
     
     [Space]
@@ -90,11 +90,11 @@ public class MovementPlayer : MonoBehaviour
 
         if (powerB == true)
         {
-            if (Input.GetKey(KeyCode.LeftShift) && ishealing == false && isattacking == false)
+            if (Input.GetKey(KeyCode.LeftShift) && ishealing == false && isattacking == false && amunnition.isreloading == false)
             {
                 velX = dash;
             }
-            else if (ishealing == true || isattacking == true)
+            else if (ishealing == true || isattacking == true || amunnition.isreloading == true)
             {
                 velX =  velHeal;
             }
@@ -160,7 +160,7 @@ public class MovementPlayer : MonoBehaviour
         isattacking = false;
         StopCoroutine("Attacking");
     }
-    private bool TouchFloor()
+    public bool TouchFloor()
     {
         RaycastHit2D touch = Physics2D.Raycast(transform.position + new Vector3(0, -2f, 0), Vector2.down, 0.2f);
         if(touch.collider != null && touch.collider.gameObject.CompareTag("Floor"))
