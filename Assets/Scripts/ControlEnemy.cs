@@ -170,11 +170,11 @@ public class ControlEnemy : MonoBehaviour
         RaycastHit2D rayCheck;
         if (sprite.flipX == true)
         {
-            rayCheck = Physics2D.Raycast(transform.position + new Vector3(0, 0, 0), Vector2.right, 0.8f);
+            rayCheck = Physics2D.Raycast(transform.position + new Vector3(1.5f, 0, 0), Vector2.right, 0.8f);
         }
         else
         {
-            rayCheck = Physics2D.Raycast(transform.position + new Vector3(0, 0, 0), Vector2.left, 0.8f);   
+            rayCheck = Physics2D.Raycast(transform.position + new Vector3(-1.5f, 0, 0), Vector2.left, 0.8f);   
         }
 
         if (rayCheck.collider != null && rayCheck.collider.gameObject.CompareTag("Player"))

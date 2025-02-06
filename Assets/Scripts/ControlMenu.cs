@@ -19,7 +19,7 @@ public class controlMenu : MonoBehaviour
         public void CargarEscena()
     {
         SceneManager.LoadScene("Juego");
-
+        Time.timeScale=1f;
     }
         public void OnClickExit()
     {

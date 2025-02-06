@@ -188,10 +188,19 @@ public class MovementPlayer : MonoBehaviour
             spritePlayer.color = Color.red;
             if (numLife <= 0)
             {
-                Destroy(gameObject);
+                StartCoroutine(Dying());
             }
             Invoke("MakeVulnerable", 0.5f);
         }
+    }
+
+    IEnumerator Dying()
+    {
+        anim.SetBool("Death", true);
+        yield return new WaitForSeconds(0.4f);
+        HUD.GetComponent<controlMenu>().MenuPlay.SetActive(true);
+        Time.timeScale = 0;
+        StopCoroutine(Dying());
     }
 
 
@@ -262,7 +271,14 @@ public class MovementPlayer : MonoBehaviour
     {
         numLife += 25 + nivelVida * 10;
         barraVida.addLife(25 + nivelVida * 10);
-        velX = dash + 1;
+        if (isattacking == true)
+        {
+            velX = velHeal;
+        }
+        else if (isattacking == false)
+        {
+            velX = dash + 1;
+        }
         yield return new WaitForSeconds(7f);
         velX = velN;
         yield return new WaitForSeconds(15f);
