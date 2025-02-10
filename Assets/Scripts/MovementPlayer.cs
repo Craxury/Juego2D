@@ -49,6 +49,17 @@ public class MovementPlayer : MonoBehaviour
     private int ataque;
     private bool isattacking;
     private bool ishealing;
+    private bool isgrounded;
+    private bool ismoving;
+
+    public AudioSource source;
+
+    public AudioClip Attack;
+    public AudioClip Heal;
+    public AudioClip Steps;
+    public AudioClip Upgradehp;
+    public AudioClip hit;
+    public AudioClip Coins;
 
 
     
@@ -56,6 +67,7 @@ public class MovementPlayer : MonoBehaviour
 
     void Start()
     {
+        source = GetComponent<AudioSource>();
         phisicsPlayer = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spritePlayer = GetComponent<SpriteRenderer>();
@@ -90,9 +102,15 @@ public class MovementPlayer : MonoBehaviour
 
         if (powerB == true)
         {
+            
             if (Input.GetKey(KeyCode.LeftShift) && ishealing == false && isattacking == false && amunnition.isreloading == false)
             {
                 velX = dash;
+                    if(isgrounded == true && Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+                {
+                    StartCoroutine(Sounds());
+                }
+                else{}
             }
             else if (ishealing == true || isattacking == true || amunnition.isreloading == true)
             {
@@ -101,7 +119,21 @@ public class MovementPlayer : MonoBehaviour
             else
             { 
                 velX = velN;
+                    if(isgrounded == true && Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+                {
+                    StartCoroutine(Sounds());
+                }
+                else{}
             }
+            
+        }
+
+        IEnumerator Sounds()
+        {
+            source.PlayOneShot(Steps);
+            yield return new WaitForSeconds(0.08f);
+            source.Stop();
+            StopCoroutine(Sounds());
         }
         
 
@@ -167,11 +199,13 @@ public class MovementPlayer : MonoBehaviour
         {
             anim.SetBool("Floor", true);
             lastPosition=gameObject.transform.position;
+            isgrounded =  true;
             return true;
         }
         else
         {
             anim.SetBool("Floor", false);
+            isgrounded = false;
             return false;
         }
     }
