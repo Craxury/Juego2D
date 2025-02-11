@@ -92,6 +92,10 @@ public class MovementPlayer : MonoBehaviour
         Power();
         if (Time.time - lastTimeShoot >= 0.5f)
         { Shooting();}
+        if(isgrounded == true)
+        {
+            source.enabled = true;
+        }
     }
 
     private void Movement()
@@ -106,7 +110,7 @@ public class MovementPlayer : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftShift) && ishealing == false && isattacking == false && amunnition.isreloading == false)
             {
                 velX = dash;
-                    if(isgrounded == true && Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+                if(isgrounded == true && ismoving == false && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))) 
                 {
                     StartCoroutine(Sounds());
                 }
@@ -119,7 +123,7 @@ public class MovementPlayer : MonoBehaviour
             else
             { 
                 velX = velN;
-                    if(isgrounded == true && Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+                    if(isgrounded == true && ismoving == false && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))) 
                 {
                     StartCoroutine(Sounds());
                 }
@@ -130,9 +134,10 @@ public class MovementPlayer : MonoBehaviour
 
         IEnumerator Sounds()
         {
+            ismoving = true;
             source.PlayOneShot(Steps);
-            yield return new WaitForSeconds(0.08f);
-            source.Stop();
+            yield return new WaitForSeconds(0.3f);
+            ismoving = false;
             StopCoroutine(Sounds());
         }
         
@@ -177,6 +182,7 @@ public class MovementPlayer : MonoBehaviour
         anim.SetBool("AttackBool", true);
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(0.65f);
+        source.PlayOneShot(Attack);
         lastTimeShoot = Time.time;
         magicAmmount--;
         amunnition.useMagic(magicAmmount);
@@ -220,6 +226,7 @@ public class MovementPlayer : MonoBehaviour
             barraVida.minusLife(numLife);
             vulnerable = false;
             spritePlayer.color = Color.red;
+            source.PlayOneShot(hit);
             if (numLife <= 0)
             {
                 StartCoroutine(Dying());
@@ -247,6 +254,7 @@ public class MovementPlayer : MonoBehaviour
     public void AddScore(int score)
     {
         scoreGeneral += score;
+        source.PlayOneShot(Coins);
         controlHud.setTextScore(scoreGeneral);
     }
 
@@ -256,6 +264,7 @@ public class MovementPlayer : MonoBehaviour
         nivelVida++;
         barraVida.setMaxLife(numLifeMax);
         numLife = numLifeMax;
+        source.PlayOneShot(Upgradehp);
     }
 
     public void AddLife()
@@ -286,6 +295,7 @@ public class MovementPlayer : MonoBehaviour
         barraVida.addLife(25 + nivelVida * 3);
         barraRecovery.minusRecovery(5);
         numKills = numKills - 5;
+        source.PlayOneShot(Heal);
         yield return new WaitForSeconds(1.1f);
         anim.SetBool("healing", false);
         ishealing = false;

@@ -11,12 +11,15 @@ public class Ammo : MonoBehaviour
     private MovementPlayer player;
     private Animator anim;
     public bool isreloading;
+    public AudioSource source;
+    public AudioClip reloadSound;
 
 
     //public GameObject numMagicExtra;
     // Start is called before the first frame update
     void Start()
     {
+        source = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
         anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<MovementPlayer>();
         foreach (var item in balas)
@@ -27,10 +30,7 @@ public class Ammo : MonoBehaviour
 
     void Update()
     {
-        
         getMagic();
-
-        
     }
 
     public void getMagic()
@@ -46,6 +46,7 @@ public class Ammo : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
             {
+                source.PlayOneShot(reloadSound, 0.5f);
                 anim.SetBool("Reload", true);
                 balas[i].SetActive(true);
             }

@@ -35,10 +35,15 @@ public class ControlEnemy : MonoBehaviour
     private int killcount;
     public HPRecovery barraRecovery;
     private bool attack;
+    public AudioSource source;
+    public AudioClip attackSound;
+    public AudioClip hurtSound;
+    public AudioClip deathSound;
 
     // Start is called before the first frame update
     void Awake()
     {
+        source = GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<MovementPlayer>();
         sprite = GetComponent<SpriteRenderer>();
         weapon = GetComponent<PlayerShoot>();
@@ -107,6 +112,7 @@ public class ControlEnemy : MonoBehaviour
         currentHP -= damage / armor;
         vulnerable = false;
         sprite.color = Color.red;
+        source.PlayOneShot(hurtSound);
             if (currentHP <= 0)
         {
             StopAllCoroutines();
@@ -123,6 +129,7 @@ public class ControlEnemy : MonoBehaviour
         sprite.color = Color.white;
         vulnerable = true;
         anim.SetTrigger("Death");
+        source.PlayOneShot(deathSound);
         yield return new WaitForSeconds(1f);
         velocity = 0;
         player.numKills++;
@@ -187,6 +194,7 @@ public class ControlEnemy : MonoBehaviour
     {
         anim.SetTrigger("Attack");
         velocity = 0;
+        source.PlayOneShot(attackSound);
         yield return new WaitForSeconds(1.2f);
         velocity = 5;
         attack = false;
