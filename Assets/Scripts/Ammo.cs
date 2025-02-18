@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
@@ -14,9 +13,6 @@ public class Ammo : MonoBehaviour
     public AudioSource source;
     public AudioClip reloadSound;
 
-
-    //public GameObject numMagicExtra;
-    // Start is called before the first frame update
     void Start()
     {
         source = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();

@@ -25,8 +25,6 @@ public class ControlEnemy : MonoBehaviour
 
     [Space]
 
-    public GameObject[] drop;
-
     private SpriteRenderer sprite;
     private float lastPositionX;
     private PlayerShoot weapon;
@@ -134,7 +132,7 @@ public class ControlEnemy : MonoBehaviour
         velocity = 0;
         player.numKills++;
         barraRecovery.addLife(1);
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 
     IEnumerator Movement()

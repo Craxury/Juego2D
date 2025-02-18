@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7763470309756119380}
   m_Layer: 0
   m_Name: Enemigo-SheetIdle_0
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,7 +128,6 @@ MonoBehaviour:
   HP: 20
   currentHP: 0
   armor: 1
-  drop: []
   barraRecovery: {fileID: 0}
   source: {fileID: 7763470309756119380}
   attackSound: {fileID: 8300000, guid: ea30758b73547e646b105d96be03c39f, type: 3}

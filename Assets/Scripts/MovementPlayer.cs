@@ -131,6 +131,14 @@ public class MovementPlayer : MonoBehaviour
             }
             
         }
+        else if (ishealing == true || isattacking == true || amunnition.isreloading == true)
+        {
+            velX =  velHeal;
+        }
+        else if (powerB == false)
+        {
+            velX = dash + 1;
+        }
 
         IEnumerator Sounds()
         {
